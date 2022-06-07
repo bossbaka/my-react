@@ -1,6 +1,26 @@
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+  font-family: 'Prompt-Regular';
+  src: url('./fonts/Prompt-Regular.ttf');
+}
+
+@font-face {
+  font-family: 'Prompt-Medium';
+  src: local('Prompt-Medium'),url('./fonts/Prompt-Medium.ttf')format('truetype');
+}
+
+@font-face {
+  font-family: 'Prompt-Bold';
+  src: local('Prompt-Bold'),url('./fonts/Prompt-Bold.ttf') format('truetype');
+}
+
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+  font-family: 'Prompt-Regular',-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -11,3 +31,5 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+
