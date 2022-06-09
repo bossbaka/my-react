@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import ProductList from "../product/ProductList";
 import Calculator from "./Calculator";
 import Grid from "@mui/material/Grid";
+import axios from "axios";
 
 function Monitor({ products }) {
   const [orders, setOrders] = useState([]);
@@ -34,6 +35,25 @@ function Monitor({ products }) {
     setOrders(resultOrder);
   };
 
+  const confirmOrder = async () => {
+    await axios
+      .post("http://localhost:3001/orders", {
+        orderedDate: new Date(),
+        totalPrice,
+        orders,
+      })
+      .then((res) => {
+        setTotalPrice(0);
+        setOrders([]);
+      })
+      .catch((e) => console.error(e));
+  };
+
+  const cancelOrder = () => {
+    setTotalPrice(0);
+    setOrders([]);
+  };
+
   return (
     <Grid alignItems="top" justifyContent="center" container spacing={2}>
       <Grid item xs={8}>
@@ -44,6 +64,8 @@ function Monitor({ products }) {
           totalPrice={totalPrice}
           orders={orders}
           onDelOrder={delOrder}
+          onCancelOrder={cancelOrder}
+          onConfirmOrder={confirmOrder}
         />
       </Grid>
     </Grid>
