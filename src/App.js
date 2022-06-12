@@ -1,8 +1,13 @@
 import logo from "./logo.svg";
 import Header from "./Layout/Header";
 import Footer from "./Layout/Footer";
-import Main from "./Layout/Main";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Home from "./Pages/Home";
+import Layout from "./Layout/Layout";
+import NotFound from "./Pages/NotFound";
+import Order from "./Pages/Order";
+import Product from "./Pages/Product";
 
 const theme = createTheme({
   palette: {
@@ -37,11 +42,19 @@ theme.typography.h3 = {
 function App() {
   return (
     <div>
-      <ThemeProvider theme={theme}>
-        <Header />
-        <Main />
-        <Footer />
-      </ThemeProvider>
+      <BrowserRouter>
+        <ThemeProvider theme={theme}>
+          <Routes>
+            <Route path="/" element={<Layout />}>
+              <Route index element={<Home />} />
+              <Route path="/orders" element={<Order />} />
+              <Route path="/products" element={<Product />} />
+            </Route>
+
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </ThemeProvider>
+      </BrowserRouter>
     </div>
   );
 }

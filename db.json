@@ -1,46 +1,68 @@
 {
-    "products": [
+  "products": [
+    {
+      "id": 1,
+      "productId": 1,
+      "productName": "สลัดผัก",
+      "unitPrice": "120",
+      "thumbnail": "/resources/images/product/1.jpg"
+    },
+    {
+      "id": 2,
+      "productId": 2,
+      "productName": "ไก่ทอด",
+      "unitPrice": "90",
+      "thumbnail": "/resources/images/product/2.jpg"
+    },
+    {
+      "id": 3,
+      "roductId": 3,
+      "productName": "บิงซู",
+      "unitPrice": "200",
+      "thumbnail": "/resources/images/product/3.jpg"
+    },
+    {
+      "id": 4,
+      "productId": 4,
+      "productName": "เฟรนฟราย",
+      "unitPrice": "140",
+      "thumbnail": "/resources/images/product/4.jpg"
+    },
+    {
+      "id": 5,
+      "productId": 5,
+      "productName": "เค้ก 3 ชั้น",
+      "unitPrice": "200",
+      "thumbnail": "/resources/images/product/5.jpg"
+    }
+  ],
+  "orders": [
+    {
+      "orderedDate": "2022-06-11T11:56:54.154Z",
+      "totalPrice": 290,
+      "orders": [
         {
-            "id": 1,
-            "roductId": 1,
-            "productName": "สลัดผัก",
-            "unitPrice": "120",
-            "thumbnail": "/resources/images/product/1.jpg"
-        },
-        {
-            "id": 2,
-            "productId": 2,
-            "productName": "ไก่ทอด",
-            "unitPrice": "90",
-            "thumbnail": "/resources/images/product/2.jpg"
-        },
-        {
+          "product": {
             "id": 3,
             "roductId": 3,
             "productName": "บิงซู",
             "unitPrice": "200",
             "thumbnail": "/resources/images/product/3.jpg"
+          },
+          "quantity": 1
         },
         {
-            "id": 4,
-            "productId": 4,
-            "productName": "เฟรนฟราย",
-            "unitPrice": "140",
-            "thumbnail": "/resources/images/product/4.jpg"
-        },
-        {
-            "id": 5,
-            "productId": 5,
-            "productName": "เค้ก 3 ชั้น",
-            "unitPrice": "200",
-            "thumbnail": "/resources/images/product/5.jpg"
-        },
-        {
-            "id": 6,
-            "productId": 6,
-            "productName": "กาแฟ เฮลตี้ฟู้ด",
-            "unitPrice": "140",
-            "thumbnail": "/resources/images/product/6.jpg"
+          "product": {
+            "id": 2,
+            "productId": 2,
+            "productName": "ไก่ทอด",
+            "unitPrice": "90",
+            "thumbnail": "/resources/images/product/2.jpg"
+          },
+          "quantity": 1
         }
-    ]
+      ],
+      "id": 1
+    }
+  ]
 }

@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
-import Monitor from "./monitor/Monitor";
 import axios from "axios";
+import Monitor from "../components/monitor/Monitor";
 
-function Main() {
+function Home() {
   const [products, setProducts] = useState("");
 
   useEffect(() => {
@@ -18,13 +18,9 @@ function Main() {
 
   return (
     <div>
-      <main className="flex-1">
-        <div className="min-h-screen bg-slate-100">
-          <Monitor products={products} />
-        </div>
-      </main>
+      <Monitor products={products} />
     </div>
   );
 }
 
-export default Main;
+export default Home;

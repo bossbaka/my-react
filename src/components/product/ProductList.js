@@ -2,7 +2,7 @@ import React from "react";
 import ProductItem from "./ProductItem";
 import Grid from "@mui/material/Grid";
 
-function ProductList({ products, onAddOrder }) {
+function ProductList({ products, onAddOrder, onDelProducts, onEditProducts }) {
   const showProducts = () => {
     if (products) {
       return products.map((product) => (
@@ -10,6 +10,8 @@ function ProductList({ products, onAddOrder }) {
           key={product.productId}
           product={product}
           onAddOrder={onAddOrder}
+          onDelProducts={onDelProducts}
+          onEditProducts={onEditProducts}
         />
       ));
     }
