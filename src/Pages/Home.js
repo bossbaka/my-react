@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Monitor from "../components/monitor/Monitor";
+import { Helmet } from "react-helmet";
 
 function Home() {
   const [products, setProducts] = useState("");
@@ -18,6 +19,9 @@ function Home() {
 
   return (
     <div>
+      <Helmet>
+        <title>my-react | Home</title>
+      </Helmet>
       <Monitor products={products} />
     </div>
   );

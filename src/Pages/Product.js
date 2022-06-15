@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Button } from "@mui/material";
 import ProductList from "../components/product/ProductList";
+import { Helmet } from "react-helmet";
 
 function Product() {
   const [products, setProducts] = useState([]);
@@ -26,6 +27,9 @@ function Product() {
 
   return (
     <div>
+      <Helmet>
+        <title>my-react | Produts</title>
+      </Helmet>
       <h1>สินค้า</h1>
       <Button onClick={() => console.log()}>เพิ่ม</Button>
       <ProductList

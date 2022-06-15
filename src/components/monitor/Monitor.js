@@ -3,6 +3,7 @@ import ProductList from "../product/ProductList";
 import Calculator from "./Calculator";
 import Grid from "@mui/material/Grid";
 import axios from "axios";
+import Alert from "@mui/material/Alert";
 
 function Monitor({ products }) {
   const [orders, setOrders] = useState([]);
@@ -56,6 +57,7 @@ function Monitor({ products }) {
           setMsg("บันทึกรายการสั่งซื้อเรียบร้อย");
         })
         .catch((e) => {
+          console.log(e);
           console.error(e);
           setMsg(`${e.message} ล้มเหลว`);
         });
@@ -75,7 +77,11 @@ function Monitor({ products }) {
 
   return (
     <div>
-      {confirm && <div>{msg}</div>}
+      {confirm && (
+        <Alert className="mb-5" severity={`warning`}>
+          {msg}
+        </Alert>
+      )}
       <Grid alignItems="top" justifyContent="center" container spacing={2}>
         <Grid item xs={8}>
           <ProductList products={products} onAddOrder={addOrder} />

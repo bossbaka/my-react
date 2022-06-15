@@ -8,16 +8,22 @@ import Layout from "./Layout/Layout";
 import NotFound from "./Pages/NotFound";
 import Order from "./Pages/Order";
 import Product from "./Pages/Product";
+import { CssBaseline } from "@mui/material";
 
 const theme = createTheme({
-  palette: {
-    primary: {
-      main: "#0052cc",
-    },
-    secondary: {
-      main: "#edf2ff",
-    },
+  typography: {
+    fontFamily: "'Prompt-Regular'",
+    textTransform: "none",
   },
+  // palette: {
+  //   primary: {
+  //     main: "#0052cc",
+  //   },
+  //   secondary: {
+  //     main: "#edf2ff",
+  //   },
+  // },
+
   breakpoints: {
     values: {
       xs: 0,
