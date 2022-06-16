@@ -6,10 +6,18 @@ import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 import Stack from "@mui/material/Stack";
+import { useLocation } from "react-router-dom";
 
 function ProductItem({ product, onAddOrder, onDelProducts, onEditProducts }) {
+  const location = useLocation();
+  console.log(location.pathname);
   return (
-    <Grid item xs={12} sm={4} md={4}>
+    <Grid
+      item
+      xs={12}
+      sm={4}
+      md={`${location.pathname == "/products" ? 3 : 4}`}
+    >
       <Card sx={{ maxWidth: 345 }}>
         <CardMedia
           component="img"
@@ -43,11 +51,23 @@ function ProductItem({ product, onAddOrder, onDelProducts, onEditProducts }) {
         )}
 
         {(onDelProducts || onEditProducts) && (
-          <Button onClick={() => onEditProducts(product)}>แก้ไข</Button>
+          <Button
+            fullWidth
+            color="info"
+            onClick={() => onEditProducts(product)}
+          >
+            แก้ไข
+          </Button>
         )}
 
         {(onDelProducts || onEditProducts) && (
-          <Button onClick={() => onDelProducts(product)}>ลบ</Button>
+          <Button
+            fullWidth
+            color="error"
+            onClick={() => onDelProducts(product)}
+          >
+            ลบ
+          </Button>
         )}
       </Card>
     </Grid>

@@ -38,36 +38,58 @@ function Order() {
 
   const showOrder = () => {
     return (
-      orders &&
-      orders.map((order) => {
-        const date = new Date(order.orderedDate);
-        return (
-          <div>
-            <Card>
-              <CardHeader
-                action={
-                  <IconButton aria-label="settings" color="error">
-                    <CloseIcon onClick={() => delOrder(order)} />
-                  </IconButton>
-                }
-                subheader={` วันที่ ${date.toLocaleDateString()} ${date.toLocaleTimeString()}`}
-              />
+      <div>
+        {orders &&
+          orders.map((order) => {
+            const date = new Date(order.orderedDate);
+            return (
+              <div>
+                <Card>
+                  <CardHeader
+                    action={
+                      <IconButton aria-label="settings" color="error">
+                        <CloseIcon onClick={() => delOrder(order)} />
+                      </IconButton>
+                    }
+                    subheader={` วันที่ ${date.toLocaleDateString()} ${date.toLocaleTimeString()}`}
+                  />
+                  <TableContainer component={Paper}>
+                    <Table aria-label="spanning table">
+                      <TableHead>
+                        <TableRow>
+                          <TableCell>สินค้า</TableCell>
+                          <TableCell align="center">จำนวน</TableCell>
+                          <TableCell align="center">รวม</TableCell>
+                        </TableRow>
+                      </TableHead>
 
-              <ul>
-                {order.orders &&
-                  order.orders.map((record) => (
-                    <li>
-                      {record.product.productName} x {record.quantity} ={" "}
-                      {record.product.unitPrice * record.quantity}
-                    </li>
-                  ))}
-              </ul>
+                      <TableBody>
+                        {order.orders &&
+                          order.orders.map((record, index) => (
+                            <TableRow key={index}>
+                              <TableCell>
+                                {record.product.productName}
+                              </TableCell>
+                              <TableCell> {record.quantity} </TableCell>
+                              <TableCell>
+                                {record.product.unitPrice * record.quantity}
+                              </TableCell>
+                            </TableRow>
+                          ))}
 
-              <p>ยอดรวม {order.totalPrice}</p>
-            </Card>
-          </div>
-        );
-      })
+                        <TableRow>
+                          <TableCell align="right">
+                            ยอดรวม {order.totalPrice}
+                          </TableCell>
+                        </TableRow>
+                      </TableBody>
+                    </Table>
+                  </TableContainer>
+                </Card>
+              </div>
+            );
+          })}
+      </div>
     );
   };
 
@@ -76,8 +98,13 @@ function Order() {
       <Helmet>
         <title>my-react | Orders</title>
       </Helmet>
-      <Grid alignItems="top" justifyContent="center" container spacing={2}>
-        <Grid item xs={3}>
+      <Typography variant="h4">รายการสั่งซื้อ</Typography>
+      <Grid
+        container
+        spacing={{ xs: 2, md: 3 }}
+        columns={{ xs: 4, sm: 8, md: 12 }}
+      >
+        <Grid item xs={12} sm={4} md={3}>
           {!orders || orders.length == 0 ? (
             <Typography
               variant="h5"
