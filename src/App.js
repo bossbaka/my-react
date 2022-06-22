@@ -9,6 +9,7 @@ import NotFound from "./Pages/NotFound";
 import Order from "./Pages/Order";
 import Product from "./Pages/Product";
 import { CssBaseline } from "@mui/material";
+import ProductEdit from "./Pages/ProductEdit";
 
 const theme = createTheme({
   typography: {
@@ -55,6 +56,8 @@ function App() {
               <Route index element={<Home />} />
               <Route path="/orders" element={<Order />} />
               <Route path="/products" element={<Product />} />
+              <Route path="/products/add" element={<ProductEdit />} />
+              <Route path="/products/edit/:id" element={<ProductEdit />} />
             </Route>
 
             <Route path="*" element={<NotFound />} />

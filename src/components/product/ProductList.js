@@ -5,9 +5,9 @@ import Grid from "@mui/material/Grid";
 function ProductList({ products, onAddOrder, onDelProducts, onEditProducts }) {
   const showProducts = () => {
     if (products) {
-      return products.map((product) => (
+      return products.map((product, index) => (
         <ProductItem
-          key={product.productId}
+          key={index}
           product={product}
           onAddOrder={onAddOrder}
           onDelProducts={onDelProducts}

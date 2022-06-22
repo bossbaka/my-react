@@ -18,78 +18,73 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
+import { useGetOrdersQuery, useDeleteOrdersMutation } from "../api";
 
 function Order() {
-  const [orders, setOrders] = useState([]);
+  const {
+    data: orders,
+    isLoading,
+    isSuccess,
+    isError,
+    error,
+  } = useGetOrdersQuery();
 
-  useEffect(() => {
-    axios
-      .get("http://localhost:3001/orders")
-      .then((res) => setOrders(res.data));
-  }, []);
-
-  const delOrder = (order) => {
-    axios.delete(`http://localhost:3001/orders/${order.id}`).then((res) => {
-      axios
-        .get("http://localhost:3001/orders")
-        .then((res) => setOrders(res.data));
-    });
-  };
+  const [delOrder] = useDeleteOrdersMutation();
 
   const showOrder = () => {
     return (
-      <div>
+      <>
         {orders &&
           orders.map((order) => {
             const date = new Date(order.orderedDate);
             return (
-              <div>
-                <Card>
-                  <CardHeader
-                    action={
-                      <IconButton aria-label="settings" color="error">
-                        <CloseIcon onClick={() => delOrder(order)} />
-                      </IconButton>
-                    }
-                    subheader={` วันที่ ${date.toLocaleDateString()} ${date.toLocaleTimeString()}`}
-                  />
-                  <TableContainer component={Paper}>
-                    <Table aria-label="spanning table">
-                      <TableHead>
-                        <TableRow>
-                          <TableCell>สินค้า</TableCell>
-                          <TableCell align="center">จำนวน</TableCell>
-                          <TableCell align="center">รวม</TableCell>
-                        </TableRow>
-                      </TableHead>
+              <Card key={order.id}>
+                <CardHeader
+                  action={
+                    <IconButton
+                      aria-label="settings"
+                      color="error"
+                      onClick={() => delOrder({ order })}
+                    >
+                      <CloseIcon />
+                    </IconButton>
+                  }
+                  subheader={` วันที่ ${date.toLocaleDateString()} ${date.toLocaleTimeString()}`}
+                />
+                <TableContainer component={Paper}>
+                  <Table aria-label="spanning table">
+                    <TableHead>
+                      <TableRow>
+                        <TableCell>สินค้า</TableCell>
+                        <TableCell align="center">จำนวน</TableCell>
+                        <TableCell align="center">รวม</TableCell>
+                      </TableRow>
+                    </TableHead>
 
-                      <TableBody>
-                        {order.orders &&
-                          order.orders.map((record, index) => (
-                            <TableRow key={index}>
-                              <TableCell>
-                                {record.product.productName}
-                              </TableCell>
-                              <TableCell> {record.quantity} </TableCell>
-                              <TableCell>
-                                {record.product.unitPrice * record.quantity}
-                              </TableCell>
-                            </TableRow>
-                          ))}
+                    <TableBody>
+                      {order.orders &&
+                        order.orders.map((record, index) => (
+                          <TableRow key={index}>
+                            <TableCell>{record.product.productName}</TableCell>
+                            <TableCell> {record.quantity} </TableCell>
+                            <TableCell>
+                              {record.product.unitPrice * record.quantity}
+                            </TableCell>
+                          </TableRow>
+                        ))}
 
-                        <TableRow>
-                          <TableCell align="right">
-                            ยอดรวม {order.totalPrice}
-                          </TableCell>
-                        </TableRow>
-                      </TableBody>
-                    </Table>
-                  </TableContainer>
-                </Card>
-              </div>
+                      <TableRow>
+                        <TableCell align="right">
+                          ยอดรวม {order.totalPrice}
+                        </TableCell>
+                      </TableRow>
+                    </TableBody>
+                  </Table>
+                </TableContainer>
+              </Card>
             );
           })}
-      </div>
+      </>
     );
   };
 
@@ -104,21 +99,25 @@ function Order() {
         spacing={{ xs: 2, md: 3 }}
         columns={{ xs: 4, sm: 8, md: 12 }}
       >
-        <Grid item xs={12} sm={4} md={3}>
-          {!orders || orders.length == 0 ? (
-            <Typography
-              variant="h5"
-              gutterBottom
-              component="div"
-              color="text.secondary"
-              align="center"
-            >
-              ไม่มีรายการสั่งซื้อ
-            </Typography>
-          ) : (
-            showOrder()
-          )}
-        </Grid>
+        {error ? (
+          <p>error</p>
+        ) : isLoading ? (
+          <p>loading...</p>
+        ) : !orders || orders.length === 0 ? (
+          <Typography
+            variant="h5"
+            gutterBottom
+            component="div"
+            color="text.secondary"
+            align="center"
+          >
+            ไม่มีรายการสั่งซื้อ
+          </Typography>
+        ) : (
+          <Grid item xs={12} sm={4} md={4}>
+            {showOrder()}
+          </Grid>
+        )}
       </Grid>
     </div>
   );

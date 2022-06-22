@@ -21,7 +21,7 @@ function Calculator({
   onConfirmOrder,
 }) {
   const showOrder = (orders) => {
-    if (!orders || orders.length == 0) {
+    if (!orders || orders.length === 0) {
       return (
         <Typography
           variant="h5"

@@ -10,13 +10,13 @@ import { useLocation } from "react-router-dom";
 
 function ProductItem({ product, onAddOrder, onDelProducts, onEditProducts }) {
   const location = useLocation();
-  console.log(location.pathname);
+
   return (
     <Grid
       item
       xs={12}
       sm={4}
-      md={`${location.pathname == "/products" ? 3 : 4}`}
+      md={`${location.pathname === "/products" ? 3 : 4}`}
     >
       <Card sx={{ maxWidth: 345 }}>
         <CardMedia
@@ -64,7 +64,7 @@ function ProductItem({ product, onAddOrder, onDelProducts, onEditProducts }) {
           <Button
             fullWidth
             color="error"
-            onClick={() => onDelProducts(product)}
+            onClick={() => onDelProducts({ product })}
           >
             ลบ
           </Button>
